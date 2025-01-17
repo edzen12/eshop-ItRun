@@ -41,7 +41,7 @@ class Product(models.Model):
     image = models.ImageField(blank=True, upload_to='images/')
     description = models.TextField(verbose_name="Описание")
     price = models.DecimalField(max_digits=12, decimal_places=2, default=0)
-    status = models.CharField(max_length=10, choices=STATUS)
+    status = models.CharField(max_length=10, choices=STATUS, default='True')
     slug = models.SlugField(null=False, unique=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
