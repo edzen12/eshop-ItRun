@@ -4,7 +4,7 @@ from apps.products.models import Product, Category
 def home(request):
     products = Product.objects.all()
     sliders = Product.objects.all()[:2]
-    categories = Category.objects.all()[:8]
+    categories = Category.objects.all()[:6]
     context = {
         'products':products,
         'sliders':sliders,

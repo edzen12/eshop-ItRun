@@ -20,11 +20,11 @@ class Category(MPTTModel):
     slug = models.SlugField(null=False, unique=True)
     create_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
         return reverse("category_detail", kwargs={"slug": self.slug})
+    
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name_plural = 'Категории'
