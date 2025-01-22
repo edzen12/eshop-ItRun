@@ -54,3 +54,13 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = 'Товары'
         verbose_name = 'товар'
+
+
+class Images(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, blank=True, null=True)
+    img = models.ImageField(blank=True, upload_to='product-detail')
+
+    def __str__(self):
+        return self.title
+

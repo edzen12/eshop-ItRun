@@ -11,3 +11,13 @@ def home(request):
         'categories':categories,
     }
     return render(request, 'index.html', context)
+
+
+def product_detail(request, slug):
+    categories = Category.objects.all()[:6]
+    product = Product.objects.get(slug=slug)
+    context = {
+        'categories':categories,
+        'product':product,
+    }
+    return render(request, 'product-detail.html', context)

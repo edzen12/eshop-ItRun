@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from apps.products.views import home
+from apps.products.views import home, product_detail
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home')
+    path('', home, name='home'),
+    path('product/<slug:slug>/', product_detail, name='product_detail')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

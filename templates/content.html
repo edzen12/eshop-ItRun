@@ -82,7 +82,7 @@
 						 {% for product in products %}
 						<div class="product product-single">
 							<div class="product-thumb"> 
-								<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+								<a href='{{ product.get_absolute_url }}' class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
 								<img src="{{product.image.url}}" alt="">
 							</div>
 							<div class="product-body">
