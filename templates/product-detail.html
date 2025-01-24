@@ -26,32 +26,18 @@
 				<div class="product product-details clearfix">
 					<div class="col-md-6">
 						<div id="product-main-view">
+							{% for im in images %}
 							<div class="product-view">
-								<img src="{{product.image.url}}" alt="">
+								<img src="{{im.img.url}}" alt="">
 							</div>
-							<div class="product-view">
-								<img src="./img/main-product02.jpg" alt="">
-							</div>
-							<div class="product-view">
-								<img src="./img/main-product03.jpg" alt="">
-							</div>
-							<div class="product-view">
-								<img src="./img/main-product04.jpg" alt="">
-							</div>
+							{% endfor %}
 						</div>
 						<div id="product-view">
+							{% for im in images %}
 							<div class="product-view">
-								<img src="./img/thumb-product01.jpg" alt="">
+								<img src="{{im.img.url}}" alt="">
 							</div>
-							<div class="product-view">
-								<img src="./img/thumb-product02.jpg" alt="">
-							</div>
-							<div class="product-view">
-								<img src="./img/thumb-product03.jpg" alt="">
-							</div>
-							<div class="product-view">
-								<img src="./img/thumb-product04.jpg" alt="">
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 					<div class="col-md-6">

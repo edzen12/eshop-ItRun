@@ -62,5 +62,5 @@ class Images(models.Model):
     img = models.ImageField(blank=True, upload_to='product-detail')
 
     def __str__(self):
-        return self.title
+        return self.product.title
 
