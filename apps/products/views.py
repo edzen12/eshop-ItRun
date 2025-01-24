@@ -16,7 +16,7 @@ def home(request):
 def product_detail(request, slug):
     categories = Category.objects.all()[:6]
     product = Product.objects.get(slug=slug)
-    images = Images.objects.all()
+    images = Images.objects.filter(product=product)
     context = {
         'categories':categories,
         'product':product,
