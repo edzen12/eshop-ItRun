@@ -17,7 +17,7 @@ class ProductImageInline(admin.TabularInline):
     extra = 1
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status', 'price']
+    list_display = ['title', 'category', 'status', 'price']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProductImageInline]
 

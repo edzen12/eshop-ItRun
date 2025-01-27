@@ -35,12 +35,12 @@ class Product(models.Model):
         ('True', 'True'),
         ('False', 'False'),
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="категории")
     title = models.CharField(max_length=50, verbose_name="Название")
     keywords = models.CharField(max_length=255, verbose_name="ключевые слова для товара")
     image = models.ImageField(blank=True, upload_to='images/')
     description = models.TextField(verbose_name="Описание")
-    price = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    price = models.DecimalField(verbose_name='цена',max_digits=12, decimal_places=2, default=0)
     status = models.CharField(max_length=10, choices=STATUS, default='True')
     slug = models.SlugField(null=False, unique=True)
     create_at = models.DateTimeField(auto_now_add=True)

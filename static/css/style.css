@@ -365,14 +365,14 @@ textarea.input {
 
 .header-search>form .search-input {
   padding-left: 150px;
-  padding-right: 45px;
+  padding-right: 35px;
 }
 
 .header-search>form .search-categories {
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 135px;
+  width: 145px;
 }
 
 .header-search>form .search-btn {

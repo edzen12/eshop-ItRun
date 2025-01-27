@@ -4,7 +4,7 @@
     <div id="top-header">
         <div class="container">
             <div class="pull-left">
-                <span>Welcome to E-shop!</span>
+                <a href={% url "home" %}><span>Welcome to E-shop!</span></a>
             </div>
             <div class="pull-right">
                 <ul class="header-top-links">
@@ -48,9 +48,9 @@
                 <!-- Search -->
                 <div class="header-search">
                     <form>
-                        <input class="input search-input" type="text" placeholder="Enter your keyword">
+                        <input class="input search-input" type="text" placeholder="Поиск">
                         <select class="input search-categories">
-                            <option value="0">All Categories</option>
+                            <option value="0">Все категории</option>
                             {% for cat in categories %}
                             <option value="1">{{cat.title}}</option>
                             {% endfor %} 
