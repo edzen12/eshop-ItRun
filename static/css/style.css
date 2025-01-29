@@ -59,7 +59,14 @@ Table OF Contents
 /*----------------------------*\
 	Typography
 \*----------------------------*/
-
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
 body {
   font-family: 'Hind', sans-serif;
   color: #4A4E5A;

@@ -35,3 +35,8 @@ def category_detail(request, slug):
         'category':category,
     }
     return render(request, 'category-detail.html', context)
+
+
+def contact(request):
+    categories = Category.objects.all()[:6]
+    return render(request, 'contact.html', {'categories':categories})
