@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from apps.products.views import home, product_detail, category_detail, contact
+from apps.users.views import login_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('contact/', contact, name='contact'),
+    path('login/', login_view, name='login'),
     path('product/<slug:slug>/', product_detail, name='product_detail'),
     path('category/<slug:slug>/', category_detail, name='category_detail')
 ]

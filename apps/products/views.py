@@ -22,7 +22,7 @@ def product_detail(request, slug):
         'product':product,
         'images':images,
     }
-    return render(request, 'product-detail.html', context)
+    return render(request, 'pages/product-detail.html', context)
 
 
 def category_detail(request, slug):
@@ -34,9 +34,9 @@ def category_detail(request, slug):
         'products':products,
         'category':category,
     }
-    return render(request, 'category-detail.html', context)
+    return render(request, 'pages/category-detail.html', context)
 
 
 def contact(request):
     categories = Category.objects.all()[:6]
-    return render(request, 'contact.html', {'categories':categories})
+    return render(request, 'pages/contact.html', {'categories':categories})
