@@ -1,0 +1,20 @@
+{% extends "homebase.html" %}
+
+{% block sidebar %} {% include "sidebar2.html" %} {% endblock sidebar %}	
+{% block body %}
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="{% url "home" %}">Главная</a></li>
+				<li class="active">Личный кабинет</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+    <div class="container mb-5 mt-5"> 
+        <h1>Скоро будет</h1>
+    </div>
+
+{% endblock body %}
