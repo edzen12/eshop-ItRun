@@ -61,7 +61,7 @@
                     <form>
                         <input class="input search-input" type="text" placeholder="Поиск">
                         <select class="input search-categories">
-                            <option value="0">Все категории</option>
+                            <option value="0">{% trans "Все категории" %}</option>
                             {% for cat in categories %}
                             <option value="1">{{cat.title}}</option>
                             {% endfor %} 
