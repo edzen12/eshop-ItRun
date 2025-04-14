@@ -1,9 +1,10 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 from apps.products.models import Category, Product, Images
+from modeltranslation.admin import TranslationAdmin 
 
 
-class CategoryAdmin(DraggableMPTTAdmin):
+class CategoryAdmin(DraggableMPTTAdmin, TranslationAdmin):
     mptt_indent_field = 'title'
     list_display = ('tree_actions','indented_title', 'status')
     mptt_level_indent = 50
@@ -16,7 +17,7 @@ class ProductImageInline(admin.TabularInline):
     readonly_fields = ('id',)
     extra = 1
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     list_display = ['title', 'category', 'status', 'price']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProductImageInline]
