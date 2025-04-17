@@ -20,6 +20,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'status', 'price']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProductImageInline]
+    save_on_top = True
 
 admin.site.register(Category,  CategoryAdmin)
 admin.site.register(Product, ProductAdmin)

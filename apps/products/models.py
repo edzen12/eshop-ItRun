@@ -32,15 +32,15 @@ class Category(MPTTModel):
 
 class Product(models.Model):
     STATUS = (
-        ('True', 'True'),
-        ('False', 'False'),
+        ('True', 'True'), # в наличии товар
+        ('False', 'False'), # нет товара
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="категории")
     title = models.CharField(max_length=50, verbose_name="Название")
+    price = models.DecimalField(verbose_name='цена',max_digits=12, decimal_places=2, default=0)
     keywords = models.CharField(max_length=255, verbose_name="ключевые слова для товара")
     image = models.ImageField(blank=True, upload_to='images/')
     description = models.TextField(verbose_name="Описание")
-    price = models.DecimalField(verbose_name='цена',max_digits=12, decimal_places=2, default=0)
     status = models.CharField(max_length=10, choices=STATUS, default='True')
     slug = models.SlugField(null=False, unique=True)
     create_at = models.DateTimeField(auto_now_add=True)

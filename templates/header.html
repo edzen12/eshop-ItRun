@@ -59,15 +59,15 @@
 
                 <!-- Search -->
                 <div class="header-search">
-                    <form>
-                        <input class="input search-input" type="text" placeholder="Поиск">
+                    <form method="get" action="{% url "search" %}">
+                        <input class="input search-input" type="text" placeholder="Поиск" required>
                         <select class="input search-categories">
                             <option value="0">Все категории</option>
                             {% for cat in categories %}
                             <option value="1">{{cat.title}}</option>
                             {% endfor %} 
                         </select>
-                        <button class="search-btn"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
                 <!-- /Search -->
