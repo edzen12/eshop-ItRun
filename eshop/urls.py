@@ -13,6 +13,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login'),
     path('register/', reg_view, name='register'),
+    path('search/', search_view, name='search'),
 ]
 urlpatterns += i18n_patterns(
     path('', home, name='home'),
@@ -20,7 +21,6 @@ urlpatterns += i18n_patterns(
     path('profile/', profile_view, name='profile'),
     path('product/<slug:slug>/', product_detail, name='product_detail'),
     path('category/<slug:slug>/', category_detail, name='category_detail'),
-    path('search/', search_view, name='search'),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

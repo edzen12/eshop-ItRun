@@ -12,6 +12,7 @@
         {% for product in products %}
         <li>
             <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+            <img src="{{product.image.url}}" width="300px">
         </li>
         {% endfor %}
     </ul>
