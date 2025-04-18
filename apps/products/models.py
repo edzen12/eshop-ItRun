@@ -35,8 +35,13 @@ class Product(models.Model):
         ('True', 'True'), # в наличии товар
         ('False', 'False'), # нет товара
     )
+    GENDER_CHOICES = (
+        ('male', 'Мужское'),
+        ('female', 'Женское'),
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="категории")
     title = models.CharField(max_length=50, verbose_name="Название")
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Пол")
     price = models.DecimalField(verbose_name='цена',max_digits=12, decimal_places=2, default=0)
     keywords = models.CharField(max_length=255, verbose_name="ключевые слова для товара")
     image = models.ImageField(blank=True, upload_to='images/')
@@ -83,3 +88,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+class Faq(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Вопрос")
+    description = models.TextField(verbose_name="Ответ")
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = 'Вопросы/Ответы'
+        verbose_name = 'вопрос/ответ'

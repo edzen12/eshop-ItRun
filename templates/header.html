@@ -60,7 +60,7 @@
                 <!-- Search -->
                 <div class="header-search">
                     <form method="get" action="{% url 'search' %}">
-                        <input class="input search-input" type="text" placeholder="Поиск" name="query" required> 
+                        <input class="input search-input" type="text" placeholder="Поиск" name="query" value="{{ query }}" required> 
                         <select class="input search-categories">
                             <option value="0">Все категории</option>
                             {% for cat in categories %}

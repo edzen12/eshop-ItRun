@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from apps.products.forms import SearchForm
-from apps.products.models import Product, Category, Images
+from apps.products.models import Product, Category, Images, Faq
 
 
 def search_view(request):
@@ -12,16 +12,17 @@ def search_view(request):
     if 'query' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
-            query = form.cleaned_data['query']
-            products = Product.objects.filter(
-                (Q(title__icontains=query) | Q(keywords__icontains=query)),
-                status='True'
-            )
+            query = form.cleaned_data['query'].strip()
+            words = query.split()
+            product_query = Q()
+            category_query = Q()
 
-            categories = Category.objects.filter(
-                (Q(title__icontains=query) | Q(keywords__icontains=query)),
-                status='True'
-            )
+            for word in words:
+                product_query |= Q(title__icontains=word) | Q(keywords__icontains=word)
+                category_query |= Q(title__icontains=word) | Q(keywords__icontains=word)
+
+            products = Product.objects.filter(product_query, status='True')
+            categories = Category.objects.filter(category_query, status='True')
     context = {
         'form':form, 
         'query':query,
@@ -65,6 +66,39 @@ def category_detail(request, slug):
         'category':category,
     }
     return render(request, 'pages/category-detail.html', context)
+
+
+def male_products(request):
+    products = Product.objects.filter(gender="male", status='True')
+    categories = Category.objects.all()[:6]
+    context = {
+        'products':products,
+        'categories':categories,
+        'gender_title': 'Мужские товары',
+    }
+    return render(request, 'pages/gender_products.html', context)
+
+
+def female_products(request):
+    products = Product.objects.filter(gender="female", status='True')
+    categories = Category.objects.all()[:6]
+    context = {
+        'products':products,
+        'categories':categories,
+        'gender_title': 'Женские товары',
+    }
+    return render(request, 'pages/gender_products.html', context)
+
+
+def faq(request):
+    faqs = Faq.objects.all()
+    categories = Category.objects.all()[:6]
+    context = {
+        'faqs':faqs,
+        'categories':categories,
+        'title_faq': 'Вопросы / Ответы',
+    }
+    return render(request, 'pages/faq.html', context)
 
 
 def contact(request):
