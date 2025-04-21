@@ -1,0 +1,52 @@
+{% extends "homebase.html" %}
+
+
+{% block sidebar %} {% include "sidebar2.html" %} {% endblock sidebar %}	
+{% block body %}
+
+<!-- section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- section title -->
+			<div class="col-md-12">
+				<div class="section-title">
+					<h2 class="title">Ваша корзина</h2>
+				</div>
+			</div>
+			<!-- section title --> 
+<table>
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Сумма</th>
+            <th>Удалить</th>
+        </tr>
+    </thead>
+    <tbody> 
+        {% for item in cart %}
+          <tr>
+            <td>{{ item.product.title }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.total_price }}</td> 
+            <td>
+                <a href="{% url 'cart_remove' item.product.id %}">Удалить</a>
+            </td> 
+          </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><strong>Итого:</strong>{{ cart.get_total_price }}</p>
+
+</div>
+<!-- /row --> 
+</div>
+<!-- /container -->
+</div>
+<!-- /section -->
+{% endblock %}

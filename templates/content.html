@@ -81,7 +81,13 @@
 						<div class="product-btns">
 							<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
 							<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-							<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+							<form action="{% url 'cart_add' prod.id %}" method="post">
+								{% csrf_token %}
+								<button type="submit" class="primary-btn add-to-cart">
+									<i class="fa fa-shopping-cart"></i> 
+									В корзину
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>

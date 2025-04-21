@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from apps.products.forms import SearchForm
 from apps.products.models import Product, Category, Images, Faq
+from apps.products.cart import Cart
 
 
 def search_view(request):
@@ -104,3 +105,28 @@ def faq(request):
 def contact(request):
     categories = Category.objects.all()[:6]
     return render(request, 'pages/contact.html', {'categories':categories})
+
+
+
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.add(product=product)
+    return redirect('cart_detail')
+
+
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product=product)
+    return redirect('cart_detail')
+
+
+def cart_detail(request):
+    cart = Cart(request)
+    categories = Category.objects.all()[:6]
+    context = {
+        'categories':categories,
+        'cart':cart,
+    }
+    return render(request, 'pages/cart.html', context)
