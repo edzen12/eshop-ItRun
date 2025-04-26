@@ -43,6 +43,16 @@ class Product(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название")
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Пол")
     price = models.DecimalField(verbose_name='цена',max_digits=12, decimal_places=2, default=0)
+    discount_price = models.DecimalField(
+        verbose_name="Фиксированная скидка (в валюте)",
+        max_digits=12, decimal_places=2, null=True, blank=True,
+        help_text="Например: -500 означает скидку  500 сомов" 
+    )  
+    discount_percent = models.PositiveIntegerField(
+        verbose_name="Процентная скидка (%)",
+        blank=True, null=True, 
+        help_text="Например: 20 означает скидку 20%"
+    )
     keywords = models.CharField(max_length=255, verbose_name="ключевые слова для товара")
     image = models.ImageField(blank=True, upload_to='images/')
     description = models.TextField(verbose_name="Описание")
@@ -56,6 +66,19 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"slug": self.slug})
     
+    def get_final_price(self):
+        price = self.price
+        
+        # если есть процентная скидка
+        if self.discount_percent:
+            price = price - (price * self.discount_percent/ 100)
+
+        # если есть фиксированная скидка
+        if self.discount_price:
+            price = price - self.discount_price
+
+        return max(price, 0)
+
     class Meta:
         verbose_name_plural = 'Товары'
         verbose_name = 'товар'

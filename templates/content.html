@@ -69,7 +69,12 @@
 						<img src="{{prod.image.url}}" alt="">
 					</div>
 					<div class="product-body">
-						<h3 class="product-price">{{prod.price}}</h3>
+						<h3 class="product-price">
+							{{prod.get_final_price}}c
+							{% if prod.get_final_price != prod.price %}
+								<del class="text-danger">{{prod.price}}c</del>
+							{% endif %}
+						</h3>
 						<div class="product-rating">
 							<i class="fa fa-star"></i>
 							<i class="fa fa-star"></i>
@@ -81,13 +86,11 @@
 						<div class="product-btns">
 							<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
 							<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-							<form action="{% url 'cart_add' prod.id %}" method="post">
-								{% csrf_token %}
-								<button type="submit" class="primary-btn add-to-cart">
+							 
+								<button type="button" data-product-id="{{prod.id}}" class="primary-btn add-to-cart">
 									<i class="fa fa-shopping-cart"></i> 
 									В корзину
-								</button>
-							</form>
+								</button> 
 						</div>
 					</div>
 				</div>

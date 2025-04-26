@@ -16,13 +16,20 @@ class ProductImageInline(admin.TabularInline):
     readonly_fields = ('id',)
     extra = 1
 
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'status', 'price']
-    prepopulated_fields = {'slug': ('title',)}
-    inlines = [ProductImageInline]
-    save_on_top = True
 
-admin.site.register(Category,  CategoryAdmin)
-admin.site.register(Product, ProductAdmin)
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'get_final_price', 'discount_percent','discount_price', 'status']
+    list_filter = ('status', 'gender', 'category')
+    search_fields = ('title', 'keywords')
+    prepopulated_fields = {'slug': ('title',)}
+    inlines = [ProductImageInline] 
+    save_on_top = True
+    fields = (
+        'category', 'title', 'slug', 'gender', 'price', 'discount_percent',
+        'discount_price', 'status', 'keywords', 'image', 'description'
+    )
+
+admin.site.register(Category,  CategoryAdmin) 
 admin.site.register(Images)
 admin.site.register(Faq)

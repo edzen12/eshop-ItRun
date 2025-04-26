@@ -64,7 +64,7 @@
                         <select class="input search-categories">
                             <option value="0">Все категории</option>
                             {% for cat in categories %}
-                            <option value="1">{{cat.title}}</option>
+                            <option value="{{cat.id}}">{{cat.title}}</option>
                             {% endfor %} 
                         </select>
                         <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
@@ -109,39 +109,33 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                             <div class="header-btns-icon">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span class="qty">3</span>
+                                <span class="qty">{{ cart_total_quantity }}</span>
                             </div>
-                            <strong class="text-uppercase">My Cart:</strong>
+                            <strong class="text-uppercase">Моя корзина:</strong>
                             <br>
-                            <span>35.20$</span>
+                            <span>{{ cart_total_price|floatformat:2 }} {{ currency }}</span>
                         </a>
                         <div class="custom-menu">
                             <div id="shopping-cart">
                                 <div class="shopping-cart-list">
-                                    <div class="product product-widget">
+                                    {% for product_id, item in cart_items.items %}
+                                    <div class="product product-widget" data-product-id="{{ product_id }}">
                                         <div class="product-thumb">
-                                            <img src="https://cdn.britannica.com/28/239528-050-D89C8118/reticulated-python-Malayopython-reticulatus.jpg" alt="">
+                                            <img src="{{ item.image.url }}">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                                            <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                                            <h3 class="product-price">{{ currency }} {{ item.price }} <span class="qty">x{{ item.quantity }}</span></h3>
+                                            <h2 class="product-name"><a href="#">{{ item.title }}</a></h2>
                                         </div>
-                                        <button class="cancel-btn"><i class="fa fa-trash"></i></button>
+                                        <button class="cancel-btn remove-from-cart"><i class="fa fa-trash"></i></button>
                                     </div>
-                                    <div class="product product-widget">
-                                        <div class="product-thumb">
-                                            <img src="https://cdn.britannica.com/28/239528-050-D89C8118/reticulated-python-Malayopython-reticulatus.jpg" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-                                            <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-                                        </div>
-                                        <button class="cancel-btn"><i class="fa fa-trash"></i></button>
-                                    </div>
+                                    {% empty %}
+                                    <p>Корзина пуста</p>
+                                    {% endfor %}
                                 </div>
                                 <div class="shopping-cart-btns">
-                                    <button class="main-btn">View Cart</button>
-                                    <button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+                                    <a href="{% url "cart_detail" %}" class="main-btn">Посмотреть корзину</a>
+                                    <a href="{% url "checkout" %}" class="primary-btn">Оформить <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,8 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from apps.products.views import (home, product_detail, male_products, 
                                  female_products, category_detail, contact, 
-                                 search_view, faq, cart_add, cart_remove, cart_detail)
+                                 search_view, faq, cart_add, cart_remove, 
+                                 cart_detail, checkout_view, cart_add_ajax, cart_remove_ajax)
 from apps.users.views import (login_view, reg_view, 
                               logout_view, profile_view)
 from django.conf import settings
@@ -16,6 +17,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('register/', reg_view, name='register'),
     path('search/', search_view, name='search'),
+    path('checkout/', checkout_view, name='checkout'),
 ]
 urlpatterns += i18n_patterns(
     path('', home, name='home'),
@@ -30,6 +32,8 @@ urlpatterns += i18n_patterns(
     path('cart/', cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', cart_add, name='cart_add'),
     path('cart/remove/<int:product_id>/', cart_remove, name='cart_remove'),
+    path('cart/add/ajax/', cart_add_ajax, name='cart_add_ajax'),
+    path('cart/remove/ajax/', cart_remove_ajax, name='cart_remove_ajax'),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
