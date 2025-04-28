@@ -39,7 +39,10 @@ def search_view(request):
 
 def home(request):
     products = Product.objects.all()
-    sliders = Product.objects.all()[:2]
+    sliders = Product.objects.filter(
+        Q(discount_percent__isnull=False) | Q(discount_price__isnull=False),
+        status='True'
+    )[:5]
     categories = Category.objects.all()[:6]
     context = {
         'products': products,
@@ -104,6 +107,24 @@ def faq(request):
         'title_faq': 'Вопросы / Ответы',
     }
     return render(request, 'pages/faq.html', context)
+
+
+def discount_products(request):
+    categories = Category.objects.all()[:6]
+    products = Product.objects.filter(status="True").filter(
+        Q(discount_price__isnull=False) | Q(discount_percent__isnull=False)
+    )
+    context = { 
+        'categories': categories,
+        'products': products,
+        'title_dis': 'Товары со скидкой',
+    }
+    return render(request, 'pages/discount_products.html', context)
+
+
+def newsletter(request):
+    categories = Category.objects.all()[:6]
+    return render(request, 'pages/newsletter.html', {'categories': categories})
 
 
 def contact(request):

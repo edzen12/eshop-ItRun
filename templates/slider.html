@@ -11,9 +11,13 @@
                 <div class="banner banner-1">
                     <img src="{{slid.image.url}}" alt="">
                     <div class="banner-caption text-center">
-                        <h1>{{slid.title}}</h1>
-                        <h3 class="white-color font-weak">Up to 50% Discount</h3>
-                        <button class="primary-btn">Shop Now</button>
+                        <h1 style="color:#9ff">{{slid.title}}</h1>
+                        {% if slid.discount_percent %}
+                        <h3 class="white-color font-weak">Скидка -{{slid.discount_percent}}%</h3>
+                        {% elif slid.discount_price %}
+                        <h3 class="white-color font-weak">Скидка -{{slid.discount_price}} сом</h3>
+                        {% endif %}
+                        <a href="{{slid.get_absolute_url}}" class="primary-btn">Перейти</a>
                     </div>
                 </div>
                 {% endfor %}

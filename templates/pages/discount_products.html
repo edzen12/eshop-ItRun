@@ -1,0 +1,54 @@
+{% extends "homebase.html" %} 
+{% block sidebar %} {% include "sidebar2.html" %} {% endblock sidebar %}	
+{% block body %}
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="{% url "home" %}">Главная</a></li>
+				<li class="active">{{title_dis}}</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+    <div class="section">
+        <div class="container mt-5 mb-5">
+            {% if products %}
+                <div class="row">
+                    {% for prod in products %}
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="product product-single">
+                            <div class="product-thumb">
+                                <a href="{{ prod.get_absolute_url }}"><button class="main-btn quick-view"><i class="fa fa-search-plus"></i>просмотр</button></a>
+                                <img src="{{prod.image.url}}" alt="">
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-price">
+                                    {{prod.get_final_price}}c
+                                    {% if prod.get_final_price != prod.price %}
+                                        <del class="text-danger">{{prod.price}}c</del>
+                                    {% endif %}
+                                </h3> 
+                                <h2 class="product-name"><a href="{{ prod.get_absolute_url }}">{{prod.title}}</a></h2>
+                                <div class="product-btns">
+                                    <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                    <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                                     
+                                        <button type="button" data-product-id="{{prod.id}}" class="primary-btn add-to-cart">
+                                            <i class="fa fa-shopping-cart"></i> 
+                                            В корзину
+                                        </button> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    На данный момент нет товаров со скидкой.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}
