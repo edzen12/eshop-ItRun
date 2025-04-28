@@ -124,3 +124,16 @@ class Faq(models.Model):
     class Meta:
         verbose_name_plural = 'Вопросы/Ответы'
         verbose_name = 'вопрос/ответ'
+
+
+class VideoBlog(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Название видео(кликбайт)")
+    link_video = models.TextField( verbose_name="Ссылка",
+        help_text="вставляйте ссылку на источник. Например из youtube")
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = 'Влог'
+        verbose_name = 'влог'

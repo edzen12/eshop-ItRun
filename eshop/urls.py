@@ -25,6 +25,7 @@ urlpatterns += i18n_patterns(
     path('category/<slug:slug>/', views.category_detail, name='category_detail'),
     path('faq/', views.faq, name='faq'),
     path('newsletter/', views.newsletter, name='newsletter'),
+    path('vlog/', views.vlog, name='vlog'),
     path('discount-products/', views.discount_products, name='discount_products'),
 
     path('cart/', views.cart_detail, name='cart_detail'),

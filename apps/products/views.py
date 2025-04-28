@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from apps.products.forms import SearchForm
-from apps.products.models import Product, Category, Images, Faq
+from apps.products.models import Product, Category, Images, Faq, VideoBlog
 from apps.products.cart import Cart
 
 
@@ -107,6 +107,17 @@ def faq(request):
         'title_faq': 'Вопросы / Ответы',
     }
     return render(request, 'pages/faq.html', context)
+
+
+def vlog(request): 
+    vlogs = VideoBlog.objects.all()
+    categories = Category.objects.all()[:6]
+    context = { 
+        'vlogs': vlogs,
+        'categories': categories,
+        'title_vlog': 'Влог',
+    }
+    return render(request, 'pages/vlog.html', context)
 
 
 def discount_products(request):

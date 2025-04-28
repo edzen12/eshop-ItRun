@@ -26,23 +26,30 @@
 					<div class="col-md-6">
 						<div id="product-main-view">
 							{% if images %}
-							{% for im in images %}
-							<div class="product-view">
-								<img src="{{im.img.url}}" alt="">
-							</div>
-							{% endfor %}
-							{% else %}
-							<div class="product-view">
-								<img src="{{product.image.url}}" alt="">
-							</div>
+								<div class="product-view">
+									<img src="{{product.image.url}}" alt="">
+								</div>
+								{% for im in images %}
+								<div class="product-view">
+									<img src="{{im.img.url}}" alt="">
+								</div> 
+								{% endfor %}
+								{% else %}
+								<div class="product-view">
+									<img src="{{product.image.url}}" alt="">
+								</div>
 							{% endif %}
 						</div>
 						<div id="product-view">
 							{% if images %}
 								{% for im in images %}
 								<div class="product-view">
-									<img src="{{im.img.url}}" alt="">
+									<img src="{{product.image.url}}" alt="">
 								</div>
+								<div class="product-view">
+									<img src="{{im.img.url}}"  alt="">
+								</div>
+								
 								{% endfor %}
 							{% else %}
 							<div class="product-view">
