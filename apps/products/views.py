@@ -39,7 +39,11 @@ def search_view(request):
 
 def home(request):
     products = Product.objects.all()
-    sliders = Product.objects.all()[:2]
+    # Берем товары только со скидкой
+    sliders = Product.objects.filter(
+        Q(discount_price__isnull=False) | Q(discount_percent__isnull=False),
+        status='True'  # чтобы были только активные товары
+    )[:5]  # можно выводить больше товаров на слайдер, не только 2
     categories = Category.objects.all()[:6]
     context = {
         'products': products,
@@ -109,6 +113,26 @@ def faq(request):
 def contact(request):
     categories = Category.objects.all()[:6]
     return render(request, 'pages/contact.html', {'categories': categories})
+
+
+def discount_products(request):
+    categories = Category.objects.all()[:6]
+    products = Product.objects.filter(status='True').filter(
+        Q(discount_percent__isnull=False) | Q(discount_price__isnull=False)
+    )
+    context = {
+        'products': products,
+        'categories': categories,
+    }
+    return render(request, 'pages/discount_products.html', context)
+
+
+def newsletter(request):
+    categories = Category.objects.all()[:6] 
+    context = { 
+        'categories': categories,
+    }
+    return render(request, 'pages/newsletter.html', context)
 
 
 def cart_add(request, product_id):

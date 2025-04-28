@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
-from apps.products.views import (home, product_detail, male_products, 
+from apps.products.views import (home, product_detail, male_products, discount_products,
                                  female_products, category_detail, contact, 
-                                 search_view, faq, cart_add, cart_remove, 
+                                 search_view, faq, cart_add, cart_remove, newsletter,
                                  cart_detail, checkout_view, cart_add_ajax, cart_remove_ajax)
 from apps.users.views import (login_view, reg_view, 
                               logout_view, profile_view)
@@ -28,6 +28,8 @@ urlpatterns += i18n_patterns(
     path('product/<slug:slug>/', product_detail, name='product_detail'),
     path('category/<slug:slug>/', category_detail, name='category_detail'),
     path('faq/', faq, name='faq'),
+    path('discounts/', discount_products, name='discount_products'),
+    path('newsletter/', newsletter, name='newsletter'),
 
     path('cart/', cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', cart_add, name='cart_add'),

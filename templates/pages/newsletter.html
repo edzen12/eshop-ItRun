@@ -1,0 +1,34 @@
+{% extends 'homebase.html' %} 
+{% block body %}
+<!-- section -->
+<style>
+	.section-title:after { 
+		width: 100%; 
+	}
+</style>
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row" style="display:block; text-align:center">
+            <!-- section title -->
+            <div class="col-12">
+                <div class="section-title">
+                    <h2 class="title">Подпишитесь на наш Telegram-канал!</h2>
+                </div>
+            </div>
+            <!-- section title -->
+            <div class="col-12 text-center">
+                <p>Чтобы подписаться на наш канал и получать все обновления, просто нажмите на кнопку ниже:</p>
+                <br>
+                <p>
+                    <a href="https://t.me/your_channel_name" target="_blank" class="btn btn-lg" style="background:#FF5733; color:#fff"> Подписаться на Telegram-канал </a>
+                </p>
+            </div>
+        </div>
+		<!-- /row -->
+    </div>
+	<!-- /container -->
+</div>
+<!-- /section --> 
+ {% endblock %}
